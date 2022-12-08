@@ -5,6 +5,7 @@ with open(os.path.join(HERE,"../input/input_8.txt"),"r") as f:
     input=[x.strip("\n") for x in f.readlines()]
     rows,columns=len(input),len(input[0])
     visible_count=0
+    location=set()
     max_top=[int(x) for x in input[0]]
     for i,line in enumerate(input[1:-1],1):
         max_left=int(line[0])
@@ -17,10 +18,7 @@ with open(os.path.join(HERE,"../input/input_8.txt"),"r") as f:
                 visible=True
                 max_left=int(c)
             if(visible):
-                visible_count+=1
-                new_line=line[:j]+"0"+line[j+1:]
-                line=new_line
-                input[i]=line
+                location.add((i,j))
     max_bottom=[int(x) for x in reversed(input[-1])]
     for i,line in enumerate(reversed(input[1:-1]),1):
         max_right=int(line[-1])
@@ -33,7 +31,7 @@ with open(os.path.join(HERE,"../input/input_8.txt"),"r") as f:
                 visible=True
                 max_right=int(c)
             if(visible):
-                visible_count+=1
+                location.add((rows-1-i,columns-1-j))
 left_visible=0
 right_visible=0
 top_visible=0
@@ -48,5 +46,5 @@ for i in range(1,columns-1):
         top_visible+=1
     if(input[-1][i]!='0'):
         bottom_visible+=1
-print(visible_count,left_visible,right_visible,top_visible,bottom_visible)
-print(visible_count+left_visible+right_visible+top_visible+bottom_visible) 
+print(len(location)+left_visible+right_visible+top_visible+bottom_visible)
+print(len(location)+2*rows+2*(columns-2)) 
