@@ -34,5 +34,19 @@ with open(os.path.join(HERE,"../input/input_8.txt"),"r") as f:
                 max_right=int(c)
             if(visible):
                 visible_count+=1
-print(visible_count+2*rows+2*(columns-2))
-                 
+left_visible=0
+right_visible=0
+top_visible=0
+bottom_visible=0
+for i in range(rows):
+    if(input[i][0]!='0'):
+        left_visible+=1
+    if(input[i][-1]!='0'):
+        right_visible+=1
+for i in range(1,columns-1):
+    if(input[0][i]!='0'):
+        top_visible+=1
+    if(input[-1][i]!='0'):
+        bottom_visible+=1
+print(visible_count,left_visible,right_visible,top_visible,bottom_visible)
+print(visible_count+left_visible+right_visible+top_visible+bottom_visible) 
