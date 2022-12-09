@@ -1,5 +1,7 @@
 import os
-import time
+import curses
+
+ 
 
 class Knot:
     def __init__(self):
@@ -49,10 +51,6 @@ knots=[Knot() for _ in range(10)]
 tail_position=set()
 with open(os.path.join(HERE,"../input/input_9.txt"),"r") as f:
     input=[x.strip("\n") for x in f.readlines()]
-    max_x=0
-    min_x=0
-    max_y=0
-    min_y=0
     for line in input:
         move,steps=line.split(" ")
         print("== {} ==".format(line))
@@ -65,20 +63,11 @@ with open(os.path.join(HERE,"../input/input_9.txt"),"r") as f:
                 knots[0].right()
             else:
                 knots[0].left()
-            max_x=max(max_x,knots[0].x)
-            min_x=min(min_x,knots[0].x)
-            max_y=max(max_y,knots[0].y)
-            min_y=min(min_y,knots[0].y)
             for i in range(1,10):
-                knots[i].move_adjacent(knots[i-1])
-                max_x=max(max_x,knots[i].x)
-                min_x=min(min_x,knots[i].x)
-                max_y=max(max_y,knots[i].y)
-                min_y=min(min_y,knots[i].y)
-                
+               knots[i].move_adjacent(knots[i-1])
             tail_position.add((knots[-1].x,knots[-1].y))
             
-print(len(tail_position),min_x,min_y,max_x,max_y)
+print(len(tail_position))
                 
         
 
