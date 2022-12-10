@@ -1,29 +1,42 @@
 import os
 HERE=os.path.dirname(os.path.abspath(__file__))
-a=-20
-ss_sum=0
+def visualize(crt_pos,x):
+    if(crt_pos==0):
+        print("")
+    if(x-1<=crt_pos<=x+1):
+        print("#",end="")
+    else:
+        print("..",end="")
+
+    return (crt_pos+1)%40
 with open(os.path.join(HERE,"../input/input_10.txt"),"r") as f:
-    cycle=1
+    input=[line.strip("\n") for line in f.readlines()]
     x=1
-    while(a<=220):
-        input=f.readline().strip("\n")
-        if(input!=""):
-            op=input.split(" ")[0]
-            if(op=='noop'):
-                if(cycle==a+40):
-                    ss_sum+=cycle*x
-                    a=a+40
-                cycle+=1
-            else:
-                if(cycle<=a+40<cycle+2):
-                   ss_sum+=(a+40)*x 
-                   a+=40
-                cycle+=2
-                x+=int(input.split(" ")[1])
+    cpu_cycle=1
+    crt_pos=0
+    for line in input:
+        op=line.split(" ")[0]
+        if(op=='noop'):
+            # if(x-1<=crt_pos<=x+1):
+            #     print("#",end="")
+            # else:
+            #     print(".",end="")
+            # cpu_cycle+=1
+            crt_pos=visualize(crt_pos,x)
+            cpu_cycle+=1
         else:
-            break
-                
-print(ss_sum)
+            # if(x-1<=crt_pos<=x+1):
+            #     print("#",end="")
+            # else:
+            #     print(".",end="")
+            crt_pos=visualize(crt_pos,x)
+            cpu_cycle+=1
+            crt_pos=visualize(crt_pos,x)
+            cpu_cycle+=1
+            v=int(line.split(" ")[1])
+            x+=v
 
-         
+              
 
+
+        
