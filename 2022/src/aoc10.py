@@ -4,10 +4,9 @@ def visualize(crt_pos,x):
     if(crt_pos==0):
         print("")
     if(x-1<=crt_pos<=x+1):
-        print("#",end="")
+        print("###",end="")
     else:
-        print("..",end="")
-
+        print("...",end="")
     return (crt_pos+1)%40
 with open(os.path.join(HERE,"../input/input_10.txt"),"r") as f:
     input=[line.strip("\n") for line in f.readlines()]
@@ -17,18 +16,9 @@ with open(os.path.join(HERE,"../input/input_10.txt"),"r") as f:
     for line in input:
         op=line.split(" ")[0]
         if(op=='noop'):
-            # if(x-1<=crt_pos<=x+1):
-            #     print("#",end="")
-            # else:
-            #     print(".",end="")
-            # cpu_cycle+=1
             crt_pos=visualize(crt_pos,x)
             cpu_cycle+=1
         else:
-            # if(x-1<=crt_pos<=x+1):
-            #     print("#",end="")
-            # else:
-            #     print(".",end="")
             crt_pos=visualize(crt_pos,x)
             cpu_cycle+=1
             crt_pos=visualize(crt_pos,x)
