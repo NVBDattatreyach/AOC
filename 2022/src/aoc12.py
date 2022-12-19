@@ -19,13 +19,13 @@ for index,line in enumerate(input):
             e_index[0]=index
     new_input.append(list(line))
 queue=[]
-queue.append((s_index[0],s_index[1],0))
+queue.append((e_index[0],e_index[1],0))
 vis={}
 new_input[s_index[0]][s_index[1]]='a'
 new_input[e_index[0]][e_index[1]]='z'
 print(f"Starting {s_index} Ending {e_index}")
-valid=lambda a,b,i,j:(a+i,b+j) if a+i>=0 and a+i<m and b+j>=0 and b+j<n and (a+i,b+j) not in vis and ord(new_input[a+i][b+j])- ord(new_input[a][b])<=1 else None
-vis[(s_index[0],s_index[1])]=True
+valid=lambda a,b,i,j:(a+i,b+j) if a+i>=0 and a+i<m and b+j>=0 and b+j<n and (a+i,b+j) not in vis and ord(new_input[a+i][b+j])- ord(new_input[a][b])>=-1 else None
+vis[(e_index[0],e_index[1])]=True
 moves=[(-1,0),(1,0),(0,-1),(0,1)]
 
 while(len(queue)>0):
@@ -34,9 +34,8 @@ while(len(queue)>0):
     for move in moves:
         x=valid(cur[0],cur[1],move[0],move[1])
         if(x!=None):
-            print(x)
             vis[x]=True
             queue.append((x[0],x[1],d+1))
-            if(x[0]==e_index[0] and x[1]==e_index[1]):
+            if(new_input[x[0]][x[1]]=='a'):
                 print(f"{d+1}")
                 exit(0)
